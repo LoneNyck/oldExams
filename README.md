@@ -1,2 +1,2 @@
 # oldExams
-A repository where all the codes from exams from previous years are stored. 
+A repository where all the codes from previous years' exams are stored. 
