@@ -4,6 +4,22 @@ parametro al sottoprogramma. */
 
 #include <stdio.h>
 
+void creaArray(int *array1, int *array2, int len1, int len2, int *array3);
+
+int main(){
+    int array1[4] = {1,4,6,10};
+    int array2[4] = {2,3,6,9};
+    int array3[8] = {0};
+
+    creaArray(array1, array2, 4, 4, array3);
+
+    for(int i = 0; i < 8; i++){
+        printf("%d ", array3[i]);
+    }
+
+    return 0;
+}
+
 void creaArray(int *array1, int *array2, int len1, int len2, int *array3){
     if(len1 != 0 && len2 != 0){
         if(*array1 < *array2){
@@ -25,18 +41,4 @@ void creaArray(int *array1, int *array2, int len1, int len2, int *array3){
             creaArray(array1, array2 + 1, len1  - 1, len2, array3 + 1);
         }
     }
-}
-
-int main(){
-    int array1[4] = {1,4,6,10};
-    int array2[4] = {2,3,6,9};
-    int array3[8] = {0};
-
-    creaArray(array1, array2, 4, 4, array3);
-
-    for(int i = 0; i < 8; i++){
-        printf("%d ", array3[i]);
-    }
-
-    return 0;
 }
