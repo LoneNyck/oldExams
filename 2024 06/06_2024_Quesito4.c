@@ -13,6 +13,7 @@ typedef struct nd{
 
 void sommaTriplette(Nodo *testa);
 
+// main unicamente per il testing
 int main(){
     Nodo *testa, *nuovoNodo, *scanner;
     srand(time(NULL));
