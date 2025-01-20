@@ -4,8 +4,8 @@ della riga in cui sono posizionati. */
 
 #include <stdio.h>
 
-#define N 10
-#define M 10
+#define N 128
+#define M 128
 
 typedef struct{
     int y;
