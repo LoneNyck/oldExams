@@ -15,6 +15,7 @@ typedef struct node {
 
 Nodo * filtra(Nodo *testa);
 
+// main di ChatGPT per il testing
 int main(){
     Nodo* n1 = (Nodo*)malloc(sizeof(Nodo));
     Nodo* n2 = (Nodo*)malloc(sizeof(Nodo));
