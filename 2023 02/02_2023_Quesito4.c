@@ -38,8 +38,8 @@ int main() {
         scanner = scanner->next;
     }
 
-    lista = ruota(lista, 1);
-    printf("\nLista dopo 2 rotazioni: ");
+    lista = ruota(lista, 5);
+    printf("\nLista dopo averla ruotata: ");
 
     scanner = lista;
     while(scanner != NULL){

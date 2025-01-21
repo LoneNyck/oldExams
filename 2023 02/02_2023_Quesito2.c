@@ -21,6 +21,10 @@ int main(){
 }
 
 void creaArray(int *array1, int *array2, int len1, int len2, int *array3){
+    if(len1 == 0 && len2 == 0){
+        return;
+    }
+    
     if(len1 != 0 && len2 != 0){
         if(*array1 < *array2){
             *array3 = *array1;
