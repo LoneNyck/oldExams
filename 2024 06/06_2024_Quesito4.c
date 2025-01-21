@@ -10,12 +10,15 @@ typedef struct nd{
     int valore;
     struct nd *next;
 } Nodo;
+typedef Nodo *Lista;
 
-void sommaTriplette(Nodo *testa);
+Lista sommaTriplette(Lista testa);
 
 // main unicamente per il testing
+// cambiare il limite nel for per vedere tutti i casi possibili
 int main(){
-    Nodo *testa, *nuovoNodo, *scanner;
+    Lista testa;
+    Nodo *nuovoNodo, *scanner;
     srand(time(NULL));
 
     testa = NULL;
@@ -34,7 +37,7 @@ int main(){
     }
     printf("\n");
 
-    sommaTriplette(testa);
+    testa = sommaTriplette(testa);
 
     scanner = testa;
     while(scanner != NULL){
@@ -45,31 +48,25 @@ int main(){
     return 0;
 }
 
-
-void sommaTriplette(Nodo *testa){
-    Nodo *scanner, *temp;
-    int len = 0;
+Lista sommaTriplette(Lista testa){
+    Nodo *scanner, *temp1, *temp2;
     int i;
 
+    if(testa == NULL || testa->next == NULL || testa->next->next == NULL){
+        return testa;
+    }
+
     scanner = testa;
-    while(scanner != NULL){
-        len++;
+    while(scanner != NULL && scanner->next != NULL && scanner->next->next != NULL){
+        scanner->valore += (scanner->next->valore + scanner->next->next->valore);
+        temp1 = scanner->next;
+        temp2 = scanner->next->next;
+
+        scanner->next = temp2->next;
+        free(temp1);
+        free(temp2);
         scanner = scanner->next;
     }
 
-    if(len > 2){
-        scanner = testa; 
-        for(i = 0; i < (len / 3); i++){
-            temp = scanner->next; 
-            scanner->valore += (temp->valore + temp->next->valore);
-
-            scanner->next = temp->next; 
-            free(temp); 
-            temp = scanner->next; 
-            scanner->next = temp->next; 
-            free(temp); 
-            
-            scanner = scanner->next;
-        }
-    }
+    return testa;
 }
