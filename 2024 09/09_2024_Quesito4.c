@@ -16,13 +16,16 @@ int verificaData(Data data);
 int main(int argc, char *argv[]){
     FILE *f;
     Data data1, data2;
-    int durataTot = 0, numSoggiorni = 0;
-    float durataMedia = 0;
+    int durataTot, numSoggiorni;
+    float durataMedia;
 
     if(argc != 2){
-        printf("Errore\n");
+        printf("Argomenti insufficienti in chiamata del programma\n");
         return -1;
     }
+
+    durataTot = 0;
+    numSoggiorni = 0;
 
     f = fopen(argv[1], "r");
     while(!feof(f)){
@@ -47,20 +50,12 @@ int tempoTrascorso(Data data1, Data data2){
     int isValid;
     int i;
 
-    isValid = verificaData(data1);
-    if(!isValid){
-        return -1;
-    }
-    isValid = verificaData(data2);
-    if(!isValid){
-        return -1;
+    if(!verificaData(data1) || !verificaData(data2)){
+        return 0;
     }
 
-    if(data1.mese > data2.mese){
-        return -1;
-    }
-    if(data1.mese == data2.mese && data1.giornoMese > data2.giornoMese){
-        return -1;
+    if(data1.mese > data2.mese || (data1.mese == data2.mese && data1.giornoMese > data2.giornoMese)){
+        return 0;
     }
 
     if(data1.mese == data2.mese){
@@ -82,5 +77,4 @@ int verificaData(Data data){
         return 0;
     }
     return 1;
-
 }

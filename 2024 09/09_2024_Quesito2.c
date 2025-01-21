@@ -4,6 +4,14 @@ sostituita con 0. */
 
 #include <stdio.h>
 
+int aggiungi(int num);
+
+// main a fine di testing
+int main(){
+    printf("%d\n", aggiungi(100));
+    return 0;
+}
+
 int aggiungi(int num){
     int cifra;
     switch (num % 10){
@@ -19,9 +27,4 @@ int aggiungi(int num){
         return cifra + 10 * aggiungi(num / 10);
     }
     return cifra;
-}
-
-int main(){
-    printf("%d\n", aggiungi(100));
-    return 0;
 }
