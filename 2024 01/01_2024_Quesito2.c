@@ -24,13 +24,10 @@ int main(int argc, char *argv[]){
     }
 
     fin = fopen(argv[1], "r");
-    if(fin == NULL){
-        printf("Errore: impossibile aprire file di input");
-        return -1;
-    }
     fout = fopen(argv[2], "w");
-    if(fout == NULL){
-        printf("Errore: impossibile aprire file di output");
+
+    if(fin == NULL || fout == NULL){
+        printf("Errore: impossibile aprire uno dei file");
         return -1;
     }
 
@@ -45,7 +42,8 @@ int main(int argc, char *argv[]){
 
 void ripulisci(FILE * fin, FILE * fout){
     Prodotto lista[MAX_PROD];
-    int numeroProdotti, quantitaProdotto, presente;
+    int numeroProdotti, quantitaProdotto;
+    int presente;
     char nomeProdotto[20];
     int i;
 
@@ -56,11 +54,12 @@ void ripulisci(FILE * fin, FILE * fout){
         fscanf(fin, "%s %d", nomeProdotto, &quantitaProdotto);
         
         i = 0;
-        for(i = 0; i < numeroProdotti; i++){
+        while(i < numeroProdotti && !presente){
             if(!strcmp(lista[i].nome, nomeProdotto)){
                 lista[i].quantita += quantitaProdotto;
                 presente = 1;
             }
+            i++;
         }
         if(!presente){
             stpcpy(lista[numeroProdotti].nome, nomeProdotto);

@@ -6,8 +6,8 @@ ch( char s[] ) che restituisce il minimo carattere di s (nel consueto ordine alf
 
 char min_ch(char *s);
 
+// main per il testing; inserire una stringa dentro la funzione per provare la funzione
 int main(){
-
     printf("%c\n", min_ch(""));
 
     return 0;

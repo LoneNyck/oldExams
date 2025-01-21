@@ -15,7 +15,6 @@ typedef Nodo *Lista;
 
 void sdoppia(Lista testa, Lista *pos, Lista *neg);
 
-
 // main di ChatGPT per il testing
 int main(){
     Lista pos, neg;
