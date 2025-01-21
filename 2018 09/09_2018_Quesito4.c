@@ -1,3 +1,5 @@
+/* Si scriva una funzione ricorsiva che permette di calcolare la somma degli elementi di una matrice */
+
 #include <stdio.h>
 
 #define N 5
