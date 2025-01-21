@@ -23,7 +23,7 @@ int main(int argc, char *argv[]){
     Hotel hotelPeggiore;
 
     if(argc != 2){
-        printf("Errore: parametri mancanti nella chiamata del programma\n");
+        printf("Parametri insufficienti in chiamata\n");
         return -1;
     }
 
@@ -36,6 +36,7 @@ int main(int argc, char *argv[]){
 
 float votoHotel(char *nomeFile, Hotel *hotel){
     FILE *f = fopen(nomeFile, "r");
+
     int sommaS = 0, sommaPu = 0, sommaPo = 0, numeroVoti = 0;
     int s, pu, po;
     float mediaS, mediaPu, mediaPo;
@@ -71,20 +72,20 @@ float votoHotel(char *nomeFile, Hotel *hotel){
 }
 
 Hotel incubo(char *nomeFile){
-    FILE *fi = fopen(nomeFile, "r");
+    FILE *f = fopen(nomeFile, "r");
     char nomeFileHotel[SIZE];
     Hotel hotel[NUM_HOTEL], hotelPeggiore = {" ", 0};
     int numeroHotel;
     int i;
 
-    if(fi == NULL){
+    if(f == NULL){
         printf("Errore: non è stato possibile aprire il file\n");
     }
     else{
         numeroHotel = 0;
 
-        while(!feof(fi)){
-            fscanf(fi, "%s", nomeFileHotel);
+        while(!feof(f)){
+            fscanf(f, "%s", nomeFileHotel);
             hotel[numeroHotel].voto = votoHotel(nomeFileHotel, &hotel[numeroHotel]);
             numeroHotel++;
         }
@@ -96,7 +97,8 @@ Hotel incubo(char *nomeFile){
             }   
         }
 
-    fclose(fi);
+        fclose(f);
     }
+    
     return hotelPeggiore;
 }

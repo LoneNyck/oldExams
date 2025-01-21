@@ -11,13 +11,12 @@ distinti. La funzione dovrà restituire 1 se la condizione è verificata, 0 altr
 
 int verificaMatrice(int mat[N][M]);
 
+// main al fine di testing
 int main(){
     int mat[N][M] = {{1,3,8,2}, {10,5,12,3}, {3,2,12,16}};
-    int n;
 
-    n = verificaMatrice(mat);
+    printf("%d", verificaMatrice(mat));
 
-    printf("%d", n);
     return 0;
 }
 
@@ -51,5 +50,6 @@ int verificaMatrice(int mat[N][M]){
             i++;
         }
     }
+    
     return valida;
 }

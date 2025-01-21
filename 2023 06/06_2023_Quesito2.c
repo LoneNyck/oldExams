@@ -4,6 +4,7 @@ sostituendo ad ogni sottosequenza di almeno due caratteri alfabetici consecutivi
 una coppia di caratteri (nell’esempio ..b4..) costituita dal carattere alfabetico che viene ripetuto e dalla cifra (un
 carattere compreso tra ‘2’ e ‘9’) che indica la lunghezza della sottosequenza. */
 
+/* funzione crea lista di ChatGPT */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,12 +13,15 @@ typedef struct nd{
     char c;
     struct nd *next;
 } Nodo;
+typedef Nodo *Lista;
 
-Nodo *accorcia(Nodo *testa);
-Nodo *creaLista();
+Lista accorcia(Lista testa);
+Lista creaLista();
 
+// main per il testing
 int main(){
-    Nodo *testa, *scanner;
+    Lista testa;
+    Nodo *scanner;
 
     testa = NULL;
     testa = creaLista();
@@ -34,7 +38,7 @@ int main(){
     return 0;
 }
 
-Nodo *creaLista() {
+Lista creaLista(){
     Nodo *testa, *ultimo;
     char sequenza[100] = "ciao";
     int i;
@@ -57,14 +61,10 @@ Nodo *creaLista() {
     return testa;
 }
 
-Nodo *accorcia(Nodo *testa){
+Lista accorcia(Lista testa){
     Nodo *scanner, *uguali, *temp;
     int cont;
     int i;
-
-    if(testa == NULL || testa->next == NULL){
-        return testa;
-    }
 
     scanner = testa;
     uguali = scanner;
@@ -78,9 +78,9 @@ Nodo *accorcia(Nodo *testa){
 
         if(cont > 1){
             for(i = 0; i < cont - 2; i++){
-            temp = scanner->next;
-            scanner->next = temp->next;
-            free(temp);
+                temp = scanner->next;
+                scanner->next = temp->next;
+                free(temp);
             }
 
             uguali->c = '0' + cont; 
