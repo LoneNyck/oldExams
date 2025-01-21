@@ -12,6 +12,7 @@ Il nuovo array deve avere una dimensione strettamente necessaria a contenere i s
 void modifica(char *iniziale, char **finale);
 char conta(char *s);
 
+// main solo per testing
 int main(){
     char *iniziale = "ciao(come)stai(bella)persona";
     char *finale;

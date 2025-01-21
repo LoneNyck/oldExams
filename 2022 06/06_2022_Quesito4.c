@@ -1,5 +1,6 @@
 /* Si definisca una funzione in grado di individuare e segnalare eventuali picchi, cioè
-elementi con valori che superano quelli degli 8 elementi che li circondano di almeno 10 unità. */
+elementi con valori che superano quelli degli 8 elementi che li circondano di almeno 10 unità. 
+Si escludano i bordi. */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,6 +25,7 @@ int main(int argc, char *argv[]){
         return -1;
     }
 
+    printf("Inserire i valori della matrice\n");
     for(i = 0; i < N; i++){
         for(j = 0; j < N; j++){
             scanf("%d", &mat[i][j]);

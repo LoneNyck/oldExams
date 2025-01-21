@@ -1,4 +1,4 @@
-/* i scriva una funzione ricorsiva in C che, ricevuta come parametro la testa della lista, modifichi i valori
+/* Si scriva una funzione ricorsiva in C che, ricevuta come parametro la testa della lista, modifichi i valori
 nella lista sommando a ogni elemento il valore dell’elemento precedente. Il primo elemento resta
 invariato. */
 
