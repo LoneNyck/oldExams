@@ -1,3 +1,9 @@
+/* Un file di testo memorizza una matrice. La prima riga dà la dimensione della matrice.
+Scrivere un programma che legga la matrice e strabilisca se è un quadrato magico.
+La matrice deve contenere tutti i valori da 1 a dim^2.
+La somma di righe, colonne e diagonali deve essere la stessa. 
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
