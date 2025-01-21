@@ -67,9 +67,7 @@ int main(){
     }
     
     return 0;
-
 }
-
 
 Lista eliminaNodi(Lista testa, int max){
     Nodo *scanner, *prec, *scanner2, *prec2, *temp;
