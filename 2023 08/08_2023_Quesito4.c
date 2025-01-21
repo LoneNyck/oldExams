@@ -70,7 +70,6 @@ int main(int argc, char *argv[]){
     return 0;
 }
 
-
 Lista partizioni(int *array, int len, int max){
     Lista testa;
     Nodo *nuovo, *ultimo;
