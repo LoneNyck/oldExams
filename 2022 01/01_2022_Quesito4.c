@@ -11,12 +11,14 @@ typedef struct nd{
     struct nd *next;
 } Nodo;
 
-Nodo *frequenza(FILE *f, Nodo *testa);
-int statistiche(Nodo *testa, Nodo **min, Nodo **max);
+typedef Nodo *Lista;
+
+Lista frequenza(FILE *f, Lista testa);
+int statistiche(Lista testa, Nodo **min, Nodo **max);
 
 int main(int argc, char *argv[]){
     FILE *f;
-    Nodo *testa;
+    Lista testa;
     Nodo *max, *min;
     int totParole;
 
@@ -44,7 +46,7 @@ int main(int argc, char *argv[]){
     return 0;
 }
 
-Nodo *frequenza(FILE *f, Nodo *testa){
+Lista frequenza(FILE *f, Lista testa){
     char parola[128];
     int len;
     Nodo *nuovo, *prec, *scanner;
@@ -54,40 +56,41 @@ Nodo *frequenza(FILE *f, Nodo *testa){
         len = strlen(parola);
 
         if(len > 1){
-        nuovo = malloc(sizeof(Nodo));
-        nuovo->par = malloc(sizeof(char) * (len + 1));
+            nuovo = malloc(sizeof(Nodo));
+            nuovo->par = malloc(sizeof(char) * (len + 1));
 
-        strcpy(nuovo->par, parola);
-        nuovo->freq = 1;
+            strcpy(nuovo->par, parola);
+            nuovo->freq = 1;
 
-        prec = NULL;
-        scanner = testa;
+            prec = NULL;
+            scanner = testa;
 
-        while(scanner != NULL && strcmp(scanner->par, nuovo->par) < 0){
-            prec = scanner;
-            scanner = prec->next;
-        }
+            while(scanner != NULL && strcmp(scanner->par, nuovo->par) < 0){
+                prec = scanner;
+                scanner = prec->next;
+            }
 
-        if(scanner != NULL && strcmp(scanner->par, nuovo->par) == 0){
-            scanner->freq += nuovo->freq;
-            free(nuovo);
-        }
-        else{
-            if(prec == NULL){
-            nuovo->next = testa;
-            testa = nuovo;
+            if(scanner != NULL && strcmp(scanner->par, nuovo->par) == 0){
+                scanner->freq += nuovo->freq;
+                free(nuovo);
+                nuovo = NULL;
             }
             else{
-            nuovo->next = scanner;
-            prec->next = nuovo;
+                if(prec == NULL){
+                    nuovo->next = testa;
+                    testa = nuovo;
+                }
+                else{
+                    nuovo->next = scanner;
+                    prec->next = nuovo;
+                }
             }
-        }
         }
     }
     return testa;
 }
 
-int statistiche(Nodo *testa, Nodo **min, Nodo **max){
+int statistiche(Lista testa, Nodo **min, Nodo **max){
     Nodo *scanner;
     int totPar = 0;
 
