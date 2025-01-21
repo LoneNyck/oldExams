@@ -40,7 +40,6 @@ int main() {
     return 0;
 }
 
-
 void sottoSequenze(Lista testa, int val){
     Nodo *scanner;
     int somma;
