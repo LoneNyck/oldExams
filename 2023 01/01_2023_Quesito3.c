@@ -16,7 +16,6 @@ int controllaRicetta(FILE *fileDispensa, FILE *fileRicetta);
 
 int main(int argc, char *argv[]){
     FILE *fDisp, *fRic;
-    int prep;
 
     if(argc != 3){
         printf("Argomenti insufficienti durante la chiamata di funzione\n");
@@ -31,9 +30,7 @@ int main(int argc, char *argv[]){
         return -1;
     }
 
-    prep = controllaRicetta(fDisp, fRic);
-
-    if(prep){
+    if(controllaRicetta(fDisp, fRic)){
         printf("La ricetta può essere preparata\n");
     }
     else{
@@ -45,7 +42,6 @@ int main(int argc, char *argv[]){
 
     return 0;
 }
-
 
 int controllaRicetta(FILE *fileDispensa, FILE *fileRicetta){
     Prodotto ingredientiDisponibili[N], ingredientiRicetta[N];
@@ -88,12 +84,10 @@ int controllaRicetta(FILE *fileDispensa, FILE *fileRicetta){
             prep = 0;
         }
         else{
-            printf("mancanti %d\n)", ingredientiRicetta[i].quantita);
+            printf("mancanti %d\n", ingredientiRicetta[i].quantita);
             prep = 0;
         }
     }
-    if(prep){
-        return 1;
-    }
-    return 0;
+    
+    return prep;
 }  

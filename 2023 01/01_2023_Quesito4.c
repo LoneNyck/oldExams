@@ -19,8 +19,9 @@ Nodo *trova(Nodo *testa, int pos){
         slow = slow->next;
     }
 
+    // a seconda di come fast sia giunto alla fine, il nodo sui cui punta slow è differente
     if(fast == NULL){
-        i =  1;
+        i = 1;
     }
     else if(fast->next == NULL){
         i = 0;
