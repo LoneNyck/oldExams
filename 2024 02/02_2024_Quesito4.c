@@ -14,8 +14,7 @@ typedef Nodo *Lista;
 
 Lista maggioreDiTuttiISuccessivi(Lista testa);
 
-
-// main di ChatGPT per il testing del programma
+// main di ChatGPT per il testing della funzione
 int main(){
     Nodo *scanner;
 
@@ -68,7 +67,6 @@ int main(){
     }
     
     return 0;
-
 }
 
 Lista maggioreDiTuttiISuccessivi(Lista testa){

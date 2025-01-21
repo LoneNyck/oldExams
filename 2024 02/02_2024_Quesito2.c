@@ -1,12 +1,17 @@
 /* Un’azienda ha dotato i propri dipendenti di un sensore che emette un codice numerico ogni volta che un
-dipendente attraversa la porta d’ingresso/uscita dell’azienda. L’azienda ha meno di 100 dipendenti. A ogni
-attraversamento, il sensore registra ora e minuti del passaggio, insieme al codice del dipendente (un
-codice alfanumerico di max 4 caratteri). */
+regDipendente attraversa la porta d’ingresso/uscita dell’azienda. L’azienda ha meno di 100 dipendenti. A ogni
+attraversamento, il sensore registra ora e minuti del passaggio, insieme al codice del regDipendente (un
+codice alfanumerico di max 4 caratteri). 
+Si scrivano due funzioni. La prima calcola i minuti lavorati da un singolo dipendente.
+La seconda stampa tutte le registrazioni
+Le registrazioni son salvate su un file.
+Si scriva quindi un main che riceve come parametro il file ed eventualmente il codice del dipendente:
+nel primo caso stampa tutte le registrazioni, nel secondo i minuti lavorati dal dipendente con il codice inserito */
 
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_LUNG_COD 10
+#define MAX_LUNG_COD 5
 
 typedef struct{
     int ora;
@@ -14,17 +19,21 @@ typedef struct{
 } Orario; 
 
 int minutiLavorati(FILE *f, char *codice);
-int stampaDati(FILE *f);
+void stampaDati(FILE *f);
 
 int main(int argc, char *argv[]){
     FILE *f;
 
     if(argc != 2 && argc != 3){
-        printf("Errore\n");
+        printf("I parametri passati sono errati\n");
         return -1;
     }
 
     f = fopen(argv[1], "r");
+    if(f == NULL){
+        printf("Errore nell'apertura del file\n");
+        return -1;
+    }
 
     if(argc == 3){
         printf("%d\n", minutiLavorati(f, argv[2]));
@@ -34,35 +43,34 @@ int main(int argc, char *argv[]){
     }
 
     fclose(f);
+
+    return 0;
 }
 
 int minutiLavorati(FILE *f, char *codice){
-    Orario registrazione, regDipendente[2];
-    char codiceVisualizzato[MAX_LUNG_COD];
-    int minLavorati = 0;
-    int i = 0;
+    Orario reg, regDipendente[2];
+    char codiceLetto[MAX_LUNG_COD];
+    int minLavorati;
+    int i;
 
-    if(f == NULL){
-        printf("Errore: non è stato possibile aprire il file\n");
-        return -1;
-    }
-
+    i = 0;
     for(i = 0; i < 2; i++){
         regDipendente[i].min = 0;
         regDipendente[i].ora = 0;
     }
 
     i = 0;
-    while(!feof(f)){
-        fscanf(f, "%d %d %s", &registrazione.ora, &registrazione.min, codiceVisualizzato);
+    while(!feof(f) && i < 2){
+        fscanf(f, "%d %d %s", &reg.ora, &reg.min, codiceLetto);
 
-        if(!strcmp(codiceVisualizzato, codice)){
-            regDipendente[i].ora = registrazione.ora;
-            regDipendente[i].min = registrazione.min;
+        if(!strcmp(codiceLetto, codice)){
+            regDipendente[i].ora = reg.ora;
+            regDipendente[i].min = reg.min;
             i++;
         }
     }
 
+    minLavorati = 0;
     if(regDipendente[0].ora == regDipendente[1].ora){
         minLavorati = regDipendente[1].min - regDipendente[0].min;
     }
@@ -77,19 +85,12 @@ int minutiLavorati(FILE *f, char *codice){
     return minLavorati;
 }
 
-int stampaDati(FILE *f){
-    Orario registrazione;
+void stampaDati(FILE *f){
+    Orario reg;
     char codice[MAX_LUNG_COD];
 
-    if(f == NULL){
-        printf("Errore: non è stato possibile aprire il file\n");
-        return -1;
-    } 
-
     while(!feof(f)){
-        fscanf(f, "%d %d %s", &registrazione.ora, &registrazione.min, codice); 
-        printf("%2d %2d %4s\n", registrazione.ora, registrazione.min, codice);
+        fscanf(f, "%d %d %s", &reg.ora, &reg.min, codice); 
+        printf("%2d %2d %4s\n", reg.ora, reg.min, codice);
     }
-
-    return 0;
 }
